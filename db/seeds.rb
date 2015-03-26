@@ -30,7 +30,7 @@ Product.create(:title => 'Web Design for Developers',
   :image_url =>   '/images/wd4d.jpg',    
   :price => 42.95)
 # . . .
-Product.create(:title => 'Programming Ruby 1.9',
+Product.create(:title => 'ruby',
   :description =>
     %{<p>
         Ruby is the fastest growing and most exciting dynamic language
