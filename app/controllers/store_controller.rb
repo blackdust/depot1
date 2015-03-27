@@ -14,19 +14,10 @@
 # We make no guarantees that this code is fit for any purpose. 
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
-class Product < ActiveRecord::Base
-  #default_scope {select(:order => 'title')}
-  #default_scope :order => 'title'
-  # validation stuff...
+class StoreController < ApplicationController
+  def index
+    @products = Product.all
+	
+  end
 
-
-  validates :title, :description, :image_url, :presence => true
-  validates :price, :numericality => {:greater_than_or_equal_to => 0.01}
-# 
-  validates :title, :uniqueness => true
-  validates :image_url, :format => {
-    :with    => %r{\.(gif|jpg|png)\z}i,
-    :message => 'must be a URL for GIF, JPG or PNG image.'
-  }
-  validates :title, :length => {:minimum => 10}
 end
