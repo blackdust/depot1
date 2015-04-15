@@ -36,7 +36,15 @@ class ProductsController < ApplicationController
       format.xml  { render :xml => @product }
     end
   end
-
+  def who_bought
+    @product = Product.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.atom
+      format.xml
+      format.json { render :json => @product.to_json(:include => :orders) }
+    end
+  end
   # GET /products/new
   # GET /products/new.xml
   def new
@@ -78,7 +86,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     respond_to do |format|
-      if @product.update_attributes(params[:product])
+      if @product.update(product_params)
         format.html { redirect_to(@product,
           :notice => 'Product was successfully updated.') }
         format.xml  { head :ok }
@@ -101,4 +109,10 @@ class ProductsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  def product_params
+      params.require(:product).permit(:title, :description, :image_url, :price)
+  end
+
 end
+
+   
