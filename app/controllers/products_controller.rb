@@ -15,6 +15,7 @@
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
 class ProductsController < ApplicationController
+  skip_before_filter :authorize
   # GET /products
   # GET /products.xml
   def index
@@ -64,7 +65,7 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.xml
   def create
-    @product = Product.new(params[:product])
+    @product = Product.new(product_params)
 
     respond_to do |format|
       if @product.save
