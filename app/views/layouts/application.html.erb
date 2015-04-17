@@ -10,7 +10,7 @@
 </head>
 <body id="store">
   <div id="banner">
-    <%= form_tag store_path, :class => 'locale' do %>
+    <%= form_tag store_path, :class => 'locale' ,:method => 'get' do %>
     <!-- END_HIGHLIGHT -->
     <%= select_tag 'set_locale', 
         options_for_select(LANGUAGES, I18n.locale.to_s),
