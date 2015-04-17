@@ -14,22 +14,28 @@
 # We make no guarantees that this code is fit for any purpose. 
 # Visit http://www.pragmaticprogrammer.com/titles/rails4 for more book information.
 #---
-require 'test_helper'
+class Notifier < ActionMailer::Base
+  default :from => 'Sam Ruby <depot@example.com>'
 
-class SessionsControllerTest < ActionController::TestCase
-  test "should get new" do
-    get :new
-    assert_response :success
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.notifier.order_received.subject
+  #
+  def order_received(order)
+    @order = order
+
+    mail :to => order.email, :subject => 'Pragmatic Store Order Confirmation'
   end
 
-  test "should get create" do
-    get :create
-    assert_response :success
-  end
+  # Subject can be set in your I18n file at config/locales/en.yml
+  # with the following lookup:
+  #
+  #   en.notifier.order_shipped.subject
+  #
+  def order_shipped(order)
+    @order = order
 
-  test "should get destroy" do
-    get :destroy
-    assert_response :success
+    mail :to => order.email, :subject => 'Pragmatic Store Order Shipped'
   end
-
 end
